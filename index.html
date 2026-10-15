@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Task Calculators</title>
+    <link rel="stylesheet"
+        href="styles.css">
+</head>
+
+<body>
+    <h2>Task 1. Calculator with text box and dropdown list</h2>
+    <div class="input-box">
+        <input type="text"
+            id="task-1-value-1"
+            class="input-box-text"
+            value="10" />
+        <select name="operator"
+            id="task-1-operator-1"
+            class="input-box-text">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text"
+            id="task-1-value-2"
+            class="input-box-text"
+            value="5" />
+        <button id="task-1-button"
+            class="input-box-text">=</button>
+        <span id="task-1-result">Press = mark!</span>
+    </div>
+
+    <h2>Task 2. Calculator with text box and option buttons</h2>
+    <input type="text"
+        id="task-2-value-1"
+        value="10" />
+    <br>
+    <input type="radio"
+        id="task-2-add"
+        name="task-2-operator"
+        value="+">
+    <label for="+">Addition</label><br>
+    <input type="radio"
+        id="task-2-sub"
+        name="task-2-operator"
+        value="-">
+    <label for="-">Subtraction</label><br>
+    <input type="radio"
+        id="task-2-multi"
+        name="task-2-operator"
+        value="*">
+    <label for="*">Multiplication</label><br>
+    <input type="radio"
+        id="task-2-dist"
+        name="task-2-operator"
+        value="/">
+    <label for="/">Distribution</label><br>
+    <input type="text"
+        id="task-2-value-2"
+        value="5" />
+    <button id="task-2-button"
+        class="input-box-text">=</button>
+    <span id="task-2-result">Press = mark!</span>
+
+    <h2>Task 3. Calculator with text box and increment/decrement buttons</h2>
+    <div class="input-box">
+        <button id="task-3-value-1-button-down"
+            class="input-box-text">▼</button>
+        <input type="text"
+            id="task-3-value-1"
+            class="input-box-text"
+            value="10" />
+        <button id="task-3-value-1-button-up"
+            class="input-box-text">▲</button>
+        <select name="operator"
+            id="task-3-operator-1"
+            class="input-box-text">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <button id="task-3-value-2-button-down"
+            class="input-box-text">▼</button>
+        <input type="text"
+            id="task-3-value-2"
+            class="input-box-text"
+            value="10" />
+        <button id="task-3-value-2-button-up"
+            class="input-box-text">▲</button>
+        <button id="task-3-button"
+            class="input-box-text">=</button>
+        <span id="task-3-result">Press = mark!</span>
+    </div>
+    <script>
+        function calculator(
+            value1,
+            value2,
+            operator
+        ) {
+            if (operator === "+")
+                return Number(value1) + Number(value2);
+            else if (operator === "-")
+                return Number(value1) - Number(value2);
+            else if (operator === "*")
+                return Number(value1) * Number(value2);
+            else if (operator === "/")
+                return Number(value1) / Number(value2);
+            else
+                return 0
+        }
+
+        function setOptionResult(
+            value1ID,
+            value2ID,
+            operatorID,
+            resultID
+        ) {
+            document.getElementById(resultID).textContent = calculator(
+                value1 = document.getElementById(value1ID).value,
+                value2 = document.getElementById(value2ID).value,
+                operator = document.getElementById(operatorID).value
+            )
+        }
+
+        function setRadioResult(
+            value1ID,
+            value2ID,
+            addID,
+            subID,
+            multiID,
+            distID,
+            resultID
+        ) {
+            let operator = "+";
+
+            if (document.getElementById(addID).checked)
+                operator = "+";
+            else if (document.getElementById(subID).checked)
+                operator = "-";
+            else if (document.getElementById(multiID).checked)
+                operator = "*";
+            else if (document.getElementById(distID).checked)
+                operator = "/";
+
+            document.getElementById(resultID).textContent = calculator(
+                value1 = document.getElementById(value1ID).value,
+                value2 = document.getElementById(value2ID).value,
+                operator = operator
+            )
+        }
+
+        function setValueChangeOne(
+            valueID,
+            isAdd
+        ) {
+            if (isAdd)
+                document.getElementById(valueID).value = Number(document.getElementById(valueID).value) + 1;
+            else
+                document.getElementById(valueID).value = Number(document.getElementById(valueID).value) - 1;
+        }
+
+        document.getElementById("task-1-operator-1").value = "+";
+        document.getElementById("task-1-button").addEventListener("click", () => {
+            setOptionResult(
+                value1ID = "task-1-value-1",
+                value2ID = "task-1-value-2",
+                operatorID = "task-1-operator-1",
+                resultID = "task-1-result"
+            );
+        });
+
+        document.getElementById("task-2-add").checked = true;
+        document.getElementById("task-2-button").addEventListener("click", () => {
+            setRadioResult(
+                value1ID = "task-2-value-1",
+                value2ID = "task-2-value-2",
+                addID = "task-2-add",
+                subID = "task-2-sub",
+                multiID = "task-2-multi",
+                distID = "task-2-dist",
+                resultID = "task-2-result",
+            );
+        });
+
+        document.getElementById("task-3-operator-1").value = "+";
+        document.getElementById("task-3-button").addEventListener("click", () => {
+            setOptionResult(
+                value1ID = "task-3-value-1",
+                value2ID = "task-3-value-2",
+                operatorID = "task-3-operator-1",
+                resultID = "task-3-result"
+            );
+        });
+        document.getElementById("task-3-value-1-button-down").addEventListener("click", () => {
+            setValueChangeOne(
+                valueID = "task-3-value-1",
+                isAdd = false);
+        });
+        document.getElementById("task-3-value-1-button-up").addEventListener("click", () => {
+            setValueChangeOne(
+                valueID = "task-3-value-1",
+                isAdd = true);
+        });
+        document.getElementById("task-3-value-2-button-down").addEventListener("click", () => {
+            setValueChangeOne(
+                valueID = "task-3-value-2",
+                isAdd = false);
+        });
+        document.getElementById("task-3-value-2-button-up").addEventListener("click", () => {
+            setValueChangeOne(
+                valueID = "task-3-value-2",
+                isAdd = true);
+        });
+
+    </script>
+</body>
+
+</html>
