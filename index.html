@@ -95,21 +95,66 @@
         <span id="task-3-result">Press = mark!</span>
     </div>
     <script>
+        // function reduceZero(
+        //     value
+        // ) {
+        //     valueStr = value.toString();
+        //     let strLength = valueStr.length;
+        //     if (strLength > 17 && valueStr.indexOf(".") > -1) {
+        //         let lastChar = "";
+        //         let isRepeated = 0;
+        //         let slicePos = strLength;
+        //         let isSliced = false;
+        //         for (let i = 1; i <= strLength; i++) {
+        //             slicePos = strLength - i;
+        //             if (lastChar === valueStr.charAt(slicePos))
+        //                 isRepeated = isRepeated + 1;
+        //             else
+        //                 isRepeated = 0;
+        //             if (isRepeated >= 4) {
+        //                 isSliced = true;
+        //             }
+        //             if (isSliced && !isRepeated) {
+        //                 break;
+        //             }
+        //             lastChar = valueStr.charAt(strLength - i);
+        //         }
+        //         if (slicePos > strLength - 2)
+        //             value = Number(valueStr.slice(0, slicePos));
+        //         else {
+        //             value = Number(valueStr.slice(0, slicePos + 1));
+        //             value = Math.round(value * Math.pow(10, slicePos)) / Math.pow(10, slicePos)
+        //         }
+        //         return value;
+        //     }
+        //     else
+        //         return value;
+        // }
+
         function calculator(
             value1,
             value2,
             operator
         ) {
-            if (operator === "+")
-                return Number(value1) + Number(value2);
-            else if (operator === "-")
-                return Number(value1) - Number(value2);
+            let result = 0;
+            let dec1 = value1.toString().replace(/^\d+\./, '').length;
+            let dec2 = value2.toString().replace(/^\d+\./, '').length;
+            let num1 = Number(value1);
+            let num2 = Number(value2);
+            if (operator === "+") {
+                result = (num1 + num2).toFixed(
+                    dec1 > dec2 ? dec1 : dec2);
+            }
+            else if (operator === "-") {
+                result = (num1 - num2).toFixed(
+                    dec1 > dec2 ? dec1 : dec2);
+            }
             else if (operator === "*")
-                return Number(value1) * Number(value2);
-            else if (operator === "/")
-                return Number(value1) / Number(value2);
-            else
-                return 0
+                result = parseFloat((num1 * num2).toFixed(dec1 + dec2));
+            else if (operator === "/"){
+                result = Math.round(num1 * 10 ** dec1) / Math.round(num2 * 10 ** dec2) * (10 ** (dec1 - dec2));
+            }
+            return result;
         }
 
         function setOptionResult(
