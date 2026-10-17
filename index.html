@@ -152,7 +152,7 @@
             else if (operator === "*")
                 result = parseFloat((num1 * num2).toFixed(dec1 + dec2));
             else if (operator === "/"){
-                result = Math.round(num1 * 10 ** dec1) / Math.round(num2 * 10 ** dec2) * (10 ** (dec1 - dec2));
+                result = Math.round(num1 * 10 ** dec1) / Math.round(num2 * 10 ** dec2) * (10 ** (dec2 - dec1));
             }
             return result;
         }
